@@ -6,6 +6,7 @@ import (
 	"log"
 	"net/http"
 
+	"github.com/gorilla/mux"
 	"github.com/shiningy/nomadcoin/blockchain"
 	"github.com/shiningy/nomadcoin/utils"
 )
@@ -19,7 +20,7 @@ func (u url) MarshalText() ([]byte, error) {
 	return []byte(url), nil
 }
 
-type URLDescription struct {
+type urlDescription struct {
 	URL         url    `json:"url"`
 	Method      string `json:"method"`
 	Description string `json:"description"`
@@ -31,7 +32,7 @@ type addBlockBody struct {
 }
 
 func documentation(rw http.ResponseWriter, r *http.Request) {
-	data := []URLDescription{
+	data := []urlDescription{
 		{
 			URL:         url("/"),
 			Method:      "GET",
@@ -71,11 +72,18 @@ func blocks(rw http.ResponseWriter, r *http.Request) {
 	}
 }
 
+func block(rw http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	id := vars["id"]
+	fmt.Println(id)
+}
+
 func Start(aPort int) {
-	handler := http.NewServeMux()
+	router := mux.NewRouter()
 	port = fmt.Sprintf(":%d", aPort)
-	handler.HandleFunc("/", documentation)
-	handler.HandleFunc("/blocks", blocks)
+	router.HandleFunc("/", documentation).Methods("GET")
+	router.HandleFunc("/blocks", blocks).Methods("GET", "POST")
+	router.HandleFunc("/blocks/{id:[0-9]+}", block).Methods("GET")
 	fmt.Printf("Listening on http://localhost%s\n", port)
-	log.Fatal(http.ListenAndServe(port, handler))
+	log.Fatal(http.ListenAndServe(port, router))
 }
