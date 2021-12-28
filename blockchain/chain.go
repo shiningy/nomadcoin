@@ -18,7 +18,7 @@ func (b *blockchain) AddBlock(data string) {
 	b.Height = block.Height
 }
 
-func GetBlockchain() *blockchain {
+func Blockchain() *blockchain {
 	if b == nil {
 		once.Do(func() {
 			b = &blockchain{"", 0}
