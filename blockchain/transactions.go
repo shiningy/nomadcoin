@@ -96,7 +96,6 @@ func makeCoinbaseTx(address string) *Tx {
 		TxOuts:    txOuts,
 	}
 	tx.getId()
-	tx.sign()
 	return &tx
 }
 
