@@ -50,7 +50,7 @@ func (p *peer) read() {
 		if err != nil {
 			break
 		}
-		fmt.Print(m.Kind)
+		fmt.Print(m.Payload)
 	}
 }
 
