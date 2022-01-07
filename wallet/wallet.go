@@ -73,7 +73,7 @@ func restoreBigInts(payload string) (*big.Int, *big.Int, error) {
 		return nil, nil, err
 	}
 	firstHalfBytes := bytes[:len(bytes)/2]
-	secondHalfBytes := bytes[len(bytes):]
+	secondHalfBytes := bytes[len(bytes)/2:]
 	bigA, bigB := big.Int{}, big.Int{}
 	bigA.SetBytes(firstHalfBytes)
 	bigB.SetBytes(secondHalfBytes)
