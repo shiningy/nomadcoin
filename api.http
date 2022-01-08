@@ -1,29 +1,29 @@
 http://localhost:4000/
 ###
-http://localhost:4000/status
+http://localhost:5000/status
 ###
 http://localhost:4000/balance/1dd5a24c1d09367a7a1affea130d272ba8543275e502e2887127da547cbef1b8915b9f24f8cf840195627d8845978f613f68f620f969060642e39418db8c1ebe
 ###
 http://localhost:3000/blocks
 ###
-http://localhost:4000/mempool
+http://localhost:5000/mempool
 ###
 http://localhost:4000/wallet
 ###
-POST http://localhost:3000/blocks
+POST http://localhost:2000/blocks
 ###
-POST http://localhost:3000/transactions
+POST http://localhost:5000/transactions
 
 {
   "to":"lynn",
   "amount":10
 }
 ###
-POST http://localhost:4000/peers
+POST http://localhost:3000/peers
 
 {
   "address": "127.0.0.1",
-  "port": "3000"
+  "port": "5000"
 }
 ###
-http://localhost:4000/peers
+http://localhost:5000/peers
